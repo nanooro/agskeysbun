@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
 import { Orbitron } from "next/font/google";
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+
+
 
 // export const metadata: Metadata = {
 //   title: "Ags financials",
@@ -29,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark text-black`}
+        className={`antialiased dark text-black`}
       >
         {children}
       </body>
