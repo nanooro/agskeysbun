@@ -38,9 +38,10 @@ export default function Home() {
             height: '100%',
             objectFit: 'cover',
             objectPosition: 'center',
-            imageRendering: 'high-quality',
-            WebkitOptimizeContrast: true,
-            msInterpolationMode: 'nearest-neighbor',
+            imageRendering: 'crisp-edges',
+            // Using CSS variables for vendor prefixes
+            WebkitFontSmoothing: 'antialiased',
+            MozOsxFontSmoothing: 'grayscale',
           }}
           loading="eager"
         />
