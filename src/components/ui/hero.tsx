@@ -1,16 +1,59 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { PhoneCall } from "lucide-react";
+import { motion, useAnimation } from "framer-motion";
+import { PhoneCall, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
+
+const ScrollIndicator = () => {
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const sequence = async () => {
+      while (true) {
+        await controls.start({ y: 10, opacity: 0.5 });
+        await controls.start({ y: 0, opacity: 1 });
+      }
+    };
+    sequence();
+  }, [controls]);
+
+  return (
+    <motion.div 
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
+      onClick={() => {
+        window.scrollTo({
+          top: window.innerHeight,
+          behavior: 'smooth'
+        });
+      }}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1 }}
+    >
+      <span className="text-sm text-neutral-300">Scroll to explore</span>
+      <motion.div
+        animate={controls}
+        transition={{
+          repeat: Infinity,
+          repeatType: "reverse",
+          duration: 1.5,
+          ease: "easeInOut"
+        }}
+      >
+        <ChevronDown className="h-6 w-6 text-white" />
+      </motion.div>
+    </motion.div>
+  );
+};
 
 export default function HeroSectionOne() {
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-cover bg-center bg-no-repeat py-20" style={{ backgroundImage: "url('/grid.svg')" }}>
+    <div className="relative flex min-h-screen flex-col items-center justify-center bg-cover bg-center bg-no-repeat py-20" style={{ backgroundImage: "url('/grid.svg')" }}>
       <div className="absolute inset-0 bg-black/60"></div>
-      <div className="container relative px-4">
+      <div className="container relative px-4 flex-1 flex items-center">
         <motion.div 
-          className="mx-auto max-w-4xl rounded-2xl bg-white/10 p-8 backdrop-blur-sm border border-white/10 md:p-12"
+          className="mx-auto max-w-4xl w-full rounded-2xl bg-white/10 p-8 backdrop-blur-sm border border-white/10 md:p-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -45,6 +88,10 @@ export default function HeroSectionOne() {
             </Button>
           </motion.div>
         </motion.div>
+      </div>
+      
+      <div className="w-full relative pb-12">
+        <ScrollIndicator />
       </div>
     </div>
   );
