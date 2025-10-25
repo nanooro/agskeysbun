@@ -23,8 +23,10 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="fixed w-screen top-0 left-0 z-50 text-black bg-white/20">
-      <Navbar>
+    <div className="fixed w-screen top-0 left-0 z-50 text-black">
+      {/* Frosted glass effect */}
+      <div className="absolute inset-0 bg-white/30 dark:bg-black/20 backdrop-blur-lg transition-all duration-300" />
+      <Navbar className="relative">
         <NavBody>
           <NavbarLogo />
           <NavItems

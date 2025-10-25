@@ -1,14 +1,51 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-
-import { motion } from "framer-motion";
-
+import { motion, AnimatePresence } from "framer-motion";
 import { PhoneCall } from "lucide-react";
+import { useEffect, useState } from "react";
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1] // cubic-bezier equivalent of easeOutExpo
+    }
+  },
+} as const;
 
 export default function HeroSectionOne() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null; // Or a loading skeleton
+  }
+
   return (
-    <div className="relative mx-auto my-10 flex max-w-7xl flex-col items-center justify-center">
+    <motion.div 
+      className="relative mx-auto my-10 flex max-w-7xl flex-col items-center justify-center"
+      initial="hidden"
+      animate="show"
+      variants={container}
+    >
       {/* <Navbar /> */}
       {/* gradient circling outling blue thingy */}
       {/* <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
@@ -22,57 +59,50 @@ export default function HeroSectionOne() {
       </div> */}
       {/* gradient circling outling blue thingy */}
       <div className="px-4 py-10 md:py-20">
-        <Card className="bg-white/20 backdrop-blur-[5px] border-none">
-          {" "}
-          <h1 className=" relative z-10  mx-auto max-w-4xl text-center text-3xl font-bold text-black md:text-4xl lg:text-7xl ">
-            {"Get your loan approved in days, not months"
-              .split(" ")
-              .map((word, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
-                  animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                  transition={{
-                    duration: 0.3,
-                    delay: index * 0.1,
-                    ease: "easeInOut",
-                  }}
-                  className="mr-2 inline-block"
-                >
-                  {word}
-                </motion.span>
-              ))}
-          </h1>
-          <motion.p
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              duration: 0.3,
-              delay: 0.8,
-            }}
-            className=" relative z-10 p-2 mx-auto max-w-xl py-4 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400"
-          >
-            <span className="text-black p-2">
-              With AGS, you can get your loan in time. Contact our best in
-              class, team to get your loan approved effortlessly.
-            </span>
-          </motion.p>
-        </Card>
+        <motion.div variants={item}>
+          <Card className="bg-white/20 backdrop-blur-[5px] border-none">
+            {" "}
+            <h1 className=" relative z-10  mx-auto max-w-4xl text-center text-3xl font-bold text-black md:text-4xl lg:text-7xl ">
+              {"Get your loan approved in days, not months"
+                .split(" ")
+                .map((word, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
+                    animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: index * 0.1,
+                      ease: "easeInOut",
+                    }}
+                    className="mr-2 inline-block"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+            </h1>
+            <motion.p
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              transition={{
+                duration: 0.3,
+                delay: 0.8,
+              }}
+              className=" relative z-10 p-2 mx-auto max-w-xl py-4 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400"
+            >
+              <span className="text-black p-2">
+                With AGS, you can get your loan in time. Contact our best in
+                class, team to get your loan approved effortlessly.
+              </span>
+            </motion.p>
+          </Card>
+        </motion.div>
         <motion.div
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{
-            duration: 0.3,
-            delay: 1,
-          }}
+          variants={item}
           className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
         >
           <a 
@@ -90,7 +120,7 @@ export default function HeroSectionOne() {
         </motion.div>
         
       </div>
-    </div>
+    </motion.div>
   );
 }
 
