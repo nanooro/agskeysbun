@@ -1,126 +1,52 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { PhoneCall } from "lucide-react";
-import { useEffect, useState } from "react";
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { 
-    opacity: 1, 
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.16, 1, 0.3, 1] // cubic-bezier equivalent of easeOutExpo
-    }
-  },
-} as const;
+import { Button } from "@/components/ui/button";
 
 export default function HeroSectionOne() {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null; // Or a loading skeleton
-  }
-
   return (
-    <motion.div 
-      className="relative mx-auto my-10 flex max-w-7xl flex-col items-center justify-center"
-      initial="hidden"
-      animate="show"
-      variants={container}
-    >
-      {/* <Navbar /> */}
-      {/* gradient circling outling blue thingy */}
-      {/* <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
-        <div className="absolute top-0 h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
-      </div>
-      <div className="absolute inset-y-0 right-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
-        <div className="absolute h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
-      </div>
-      <div className="absolute inset-x-0 bottom-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
-        <div className="absolute mx-auto h-px w-40 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
-      </div> */}
-      {/* gradient circling outling blue thingy */}
-      <div className="px-4 py-10 md:py-20">
-        <motion.div variants={item}>
-          <Card className="bg-white/20 backdrop-blur-[5px] border-none">
-            {" "}
-            <h1 className=" relative z-10  mx-auto max-w-4xl text-center text-3xl font-bold text-black md:text-4xl lg:text-7xl ">
-              {"Get your loan approved in days, not months"
-                .split(" ")
-                .map((word, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
-                    animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      delay: index * 0.1,
-                      ease: "easeInOut",
-                    }}
-                    className="mr-2 inline-block"
-                  >
-                    {word}
-                  </motion.span>
-                ))}
-            </h1>
-            <motion.p
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-              }}
-              transition={{
-                duration: 0.3,
-                delay: 0.8,
-              }}
-              className=" relative z-10 p-2 mx-auto max-w-xl py-4 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400"
-            >
-              <span className="text-black p-2">
-                With AGS, you can get your loan in time. Contact our best in
-                class, team to get your loan approved effortlessly.
-              </span>
-            </motion.p>
-          </Card>
-        </motion.div>
-        <motion.div
-          variants={item}
-          className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
+    <div className="relative flex min-h-screen items-center justify-center bg-cover bg-center bg-no-repeat py-20" style={{ backgroundImage: "url('/grid.svg')" }}>
+      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="container relative px-4">
+        <motion.div 
+          className="mx-auto max-w-4xl rounded-2xl bg-white/10 p-8 backdrop-blur-sm border border-white/10 md:p-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          <a 
-            href="tel:+9916744777"
-            className="w-60 flex justify-center items-center transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
-            aria-label="Call us now"
+          <motion.h1 
+            className="mb-6 text-center text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
           >
-            <div className="flex justify-center items-center gap-2 text-xl">
-              Call Now <PhoneCall className="ml-auto" />
-            </div>
-          </a>
-          {/* <button className="w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
-            Contact Support
-          </button> */}
+            Get your loan approved in days, not months
+          </motion.h1>
+          
+          <motion.p 
+            className="mx-auto mb-8 max-w-2xl text-center text-lg text-neutral-300"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            With AGS, you can get your loan in time. Contact our best in class team to get your loan approved.
+          </motion.p>
+          
+          <motion.div 
+            className="flex justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            <Button size="lg" className="gap-2 text-lg bg-green-600 hover:bg-green-700 text-white">
+              <PhoneCall className="h-5 w-5" />
+              Call Now
+            </Button>
+          </motion.div>
         </motion.div>
-        
       </div>
-    </motion.div>
+    </div>
   );
 }
 
