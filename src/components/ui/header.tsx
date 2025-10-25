@@ -32,7 +32,16 @@ export default function Header() {
               ...item,
               className: "text-black hover:text-black",
             }))}
+            onItemClick={() => setIsMobileMenuOpen(false)}
           />
+          <a
+            href="tel:+1234567890"
+            className="hidden md:flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+            aria-label="Call us now"
+          >
+            <PhoneCallIcon className="w-4 h-4" />
+            <span>Call Now</span>
+          </a>
           <div className="flex items-center justify-center gap-4">
             {/* <NavbarButton
               onClick={() => setIsMobileMenuOpen(false)}
