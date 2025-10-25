@@ -98,3 +98,4 @@ export default function HeroSectionOne() {
 }
 
 
+// type tyesting is a very improtatn fetruare of typescript

@@ -1,8 +1,8 @@
 import { Card } from "@/components/ui/card";
-
 import { DollarSign, Clock, Percent, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface LoanOption {
   title: string;
@@ -134,8 +134,10 @@ export default function LoanOption() {
                       ))}
                     </ul>
                     
-                    <Button className="w-full bg-green-600 hover:bg-green-700 text-white" size="lg">
-                      Apply Now
+                    <Button asChild className="w-full bg-green-600 hover:bg-green-700 text-white" size="lg">
+                      <Link href="/apply-now">
+                        Apply Now
+                      </Link>
                     </Button>
                   </div>
                 </div>
