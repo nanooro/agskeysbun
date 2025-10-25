@@ -76,7 +76,7 @@ export default function HeroSectionOne() {
           className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
         >
           <a 
-            href="tel:+1234567890"
+            href="tel:+9916744777"
             className="w-60 flex justify-center items-center transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
             aria-label="Call us now"
           >
