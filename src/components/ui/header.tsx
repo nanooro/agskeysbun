@@ -11,7 +11,6 @@ import {
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
 import { useState } from "react";
-import Image from "next/image";
 import { PhoneCallIcon } from "lucide-react";
 
 export default function Header() {
@@ -24,27 +23,28 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="fixed w-screen top-0 left-0 z-50">
+    <div className="fixed w-screen top-0 left-0 z-50 text-black bg-white/20">
       <Navbar>
-        {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
-          <NavItems items={navItems} />
-          <div className="flex items-center justify-center gap-4 bg-white">
-            {/* <NavbarButton variant="secondary">Login</NavbarButton> */}
+          <NavItems
+            items={navItems.map((item) => ({
+              ...item,
+              className: "text-black hover:text-black",
+            }))}
+          />
+          <div className="flex items-center justify-center gap-4">
             {/* <NavbarButton
-              className="flex items-center justify-center gap-2"
+              onClick={() => setIsMobileMenuOpen(false)}
               variant="primary"
+              className="bg-black text-white hover:bg-black800 flex items-center gap-2"
             >
               <span>Call us!</span>
-            </NavbarButton>{" "} */}
-            {/* <div className="">
               <PhoneCallIcon className="shrink-0" />
-            </div> */}
+            </NavbarButton> */}
           </div>
         </NavBody>
 
-        {/* Mobile Navigation */}
         <MobileNav>
           <MobileNavHeader>
             <NavbarLogo />
@@ -57,29 +57,23 @@ export default function Header() {
           <MobileNavMenu
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
+            className="bg-white text-black"
           >
             {navItems.map((item, idx) => (
               <a
                 key={`mobile-link-${idx}`}
                 href={item.link}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-neutral-600 dark:text-neutral-300"
+                className="relative text-black hover:text-black"
               >
                 {item.name}
               </a>
             ))}
             <div className="flex w-full flex-col gap-4 mt-4">
-              {/* <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
-              >
-                Login
-              </NavbarButton> */}
               <NavbarButton
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
-                className="w-full"
+                className="w-full bg-black text-white hover:bg-black"
               >
                 Book a call
               </NavbarButton>
@@ -87,12 +81,8 @@ export default function Header() {
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
-
-      <DummyContent />
     </div>
   );
 }
 
-const DummyContent = () => {
-  return <></>;
-};
+const DummyContent = () => <></>;
