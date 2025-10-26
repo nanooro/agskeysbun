@@ -35,7 +35,7 @@ export default function Header() {
   };
 
   return (
-    <div className="fixed w-screen top-0 left-0 z-50 text-black dark:text-white">
+    <div className="sticky w-screen top-0 left-0 z-50 text-black dark:text-white">
       {/* Frosted glass effect */}
       <Navbar className="relative">
           <NavBody>
