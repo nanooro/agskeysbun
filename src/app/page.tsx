@@ -895,54 +895,11 @@ export default function Home() {
                 </Link>
               </Button>
               <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-green-600 flex-1 py-4 text-lg font-semibold rounded-xl">
-                <button onClick={() => scrollToSection('#apply')}>
+                <button onClick={() => scrollToSection('#contact')}>
                   Apply Online
                 </button>
               </Button>
             </div>
-          </motion.div>
-        </div>
-      </section>
-      <section id="apply" className="py-20 px-4 sm:px-6 lg:px-8 bg-green-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
-          >
-            Start Your Journey Today
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-xl text-green-100 mb-8"
-          >
-            Join thousands of satisfied customers. Apply now and get the financial support you need.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="flex flex-col sm:flex-row gap-6 justify-center"
-          >
-            <Button asChild size="lg" className="bg-white text-green-600 hover:bg-gray-100 px-10 py-5 text-xl font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105">
-              <button onClick={() => scrollToSection('#apply')}>
-                Apply for Loan
-              </button>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-green-600 px-10 py-5 text-xl font-bold rounded-xl">
-              <Link href="tel:+91801234567">
-                <Phone className="w-6 h-6 mr-2" />
-                Call Now
-              </Link>
-            </Button>
           </motion.div>
         </div>
       </section>
