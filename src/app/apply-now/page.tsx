@@ -129,7 +129,7 @@ export default function ApplyNowPage() {
           <span>Back</span>
         </Button>
         
-        <div className="max-w-3xl mx-auto bg-white/5 backdrop-blur-sm rounded-2xl p-6 md:p-8 lg:p-12 border border-white/10">
+        <div className="max-w-3xl mx-auto bg-black/20 backdrop-blur-sm rounded-2xl p-6 md:p-8 lg:p-12 border border-white/10">
           <h1 className="text-4xl font-bold text-white mb-6 text-center">
             Apply for a Loan
           </h1>
@@ -150,7 +150,7 @@ export default function ApplyNowPage() {
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-white/10 border ${errors.fullName ? 'border-red-500' : 'border-white/20'} rounded-lg text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-green-500`}
+                className={`w-full px-4 py-3 bg-black/20 border ${errors.fullName ? 'border-red-500' : 'border-white/20'} rounded-lg text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-green-500`}
                 placeholder="Enter your full name"
               />
               {errors.fullName && (
@@ -168,7 +168,7 @@ export default function ApplyNowPage() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-white/10 border ${errors.email ? 'border-red-500' : 'border-white/20'} rounded-lg text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-green-500`}
+                className={`w-full px-4 py-3 bg-black/20 border ${errors.email ? 'border-red-500' : 'border-white/20'} rounded-lg text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-green-500`}
                 placeholder="Enter your email"
               />
               {errors.email && (
@@ -186,7 +186,7 @@ export default function ApplyNowPage() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-white/10 border ${errors.phone ? 'border-red-500' : 'border-white/20'} rounded-lg text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-green-500`}
+                className={`w-full px-4 py-3 bg-black/20 border ${errors.phone ? 'border-red-500' : 'border-white/20'} rounded-lg text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-green-500`}
                 placeholder="Enter your phone number"
               />
               {errors.phone && (

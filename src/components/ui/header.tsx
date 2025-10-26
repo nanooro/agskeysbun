@@ -11,10 +11,14 @@ import {
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
 import { useState } from "react";
+import { IconMenu2, IconX } from "@tabler/icons-react";
+import Link from "next/link";
 import { PhoneCallIcon } from "lucide-react";
 
 export default function Header() {
   const navItems = [
+    { name: "Home", link: "#home" },
+    { name: "Loans", link: "#loans" },
     { name: "Features", link: "#features" },
     { name: "Pricing", link: "#pricing" },
     { name: "Contact", link: "#contact" },
@@ -22,39 +26,50 @@ export default function Header() {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId.replace('#', ''));
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   return (
-    <div className="fixed w-screen top-0 left-0 z-50 text-black">
+    <div className="fixed w-screen top-0 left-0 z-50 text-black dark:text-white">
       {/* Frosted glass effect */}
-      <div className="absolute inset-0 bg-white/30 dark:bg-black/20 backdrop-blur-lg transition-all duration-300" />
       <Navbar className="relative">
-        <NavBody>
-          <NavbarLogo />
-          <NavItems
-            items={navItems.map((item) => ({
-              ...item,
-              className: "text-black hover:text-black",
-            }))}
-            onItemClick={() => setIsMobileMenuOpen(false)}
-          />
-          <a
-            href="tel:+1234567890"
-            className="hidden md:flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
-            aria-label="Call us now"
-          >
-            <PhoneCallIcon className="w-4 h-4" />
-            <span>Call Now</span>
-          </a>
-          <div className="flex items-center justify-center gap-4">
-            {/* <NavbarButton
-              onClick={() => setIsMobileMenuOpen(false)}
-              variant="primary"
-              className="bg-black text-white hover:bg-black800 flex items-center gap-2"
-            >
-              <span>Call us!</span>
-              <PhoneCallIcon className="shrink-0" />
-            </NavbarButton> */}
-          </div>
-        </NavBody>
+          <NavBody>
+            <NavbarLogo />
+            <NavItems
+              items={navItems.map((item) => ({
+                ...item,
+                className: "text-black dark:text-white hover:text-black dark:hover:text-white",
+                onClick: () => scrollToSection(item.link),
+              }))}
+              onItemClick={() => setIsMobileMenuOpen(false)}
+            />
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="hidden lg:flex items-center justify-center p-2 text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? (
+                  <IconX className="w-6 h-6" />
+                ) : (
+                  <IconMenu2 className="w-6 h-6" />
+                )}
+              </button>
+              <Link
+                href="tel:+91801234567"
+                className="hidden lg:flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+                aria-label="Call us now"
+              >
+                <PhoneCallIcon className="w-5 h-5" />
+                <span className="font-medium">Call Now</span>
+              </Link>
+            </div>
+          </NavBody>
 
         <MobileNav>
           <MobileNavHeader>
@@ -64,33 +79,33 @@ export default function Header() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             />
           </MobileNavHeader>
-
-          <MobileNavMenu
-            isOpen={isMobileMenuOpen}
-            onClose={() => setIsMobileMenuOpen(false)}
-            className="bg-white text-black"
-          >
-            {navItems.map((item, idx) => (
-              <a
-                key={`mobile-link-${idx}`}
-                href={item.link}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-black hover:text-black"
-              >
-                {item.name}
-              </a>
-            ))}
-            <div className="flex w-full flex-col gap-4 mt-4">
-              <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full bg-black text-white hover:bg-black"
-              >
-                Book a call
-              </NavbarButton>
-            </div>
-          </MobileNavMenu>
         </MobileNav>
+
+        <MobileNavMenu
+          isOpen={isMobileMenuOpen}
+          onClose={() => setIsMobileMenuOpen(false)}
+          className="bg-white dark:bg-neutral-950 text-black dark:text-white lg:bg-white/95 lg:dark:bg-neutral-950/95 lg:backdrop-blur-sm lg:shadow-lg lg:border lg:border-white/10 lg:rounded-xl lg:mt-4"
+        >
+          {navItems.map((item, idx) => (
+            <button
+              key={`mobile-link-${idx}`}
+              onClick={() => scrollToSection(item.link)}
+              className="relative text-black dark:text-white hover:text-green-600 dark:hover:text-green-400 transition-colors text-left w-full"
+            >
+              {item.name}
+            </button>
+          ))}
+          <div className="flex w-full flex-col gap-4 mt-4">
+            <Link
+              href="tel:+91801234567"
+              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+              aria-label="Call us now"
+            >
+              <PhoneCallIcon className="w-5 h-5" />
+              <span className="font-medium">Call Now</span>
+            </Link>
+          </div>
+        </MobileNavMenu>
       </Navbar>
     </div>
   );

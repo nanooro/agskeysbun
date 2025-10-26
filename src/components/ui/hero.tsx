@@ -50,10 +50,10 @@ const ScrollIndicator = () => {
 export default function HeroSectionOne() {
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center bg-cover bg-center bg-no-repeat py-20" style={{ backgroundImage: "url('/grid.svg')" }}>
-      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-black/60 md:hidden"></div>
       <div className="container relative px-4 flex-1 flex items-center">
         <motion.div 
-          className="mx-auto max-w-4xl w-full rounded-2xl bg-white/10 p-8 backdrop-blur-sm border border-white/10 md:p-12"
+          className="mx-auto max-w-4xl w-full rounded-2xl bg-black/30 p-8 backdrop-blur-sm border border-white/10 md:p-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -82,9 +82,11 @@ export default function HeroSectionOne() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            <Button size="lg" className="gap-2 text-lg bg-green-600 hover:bg-green-700 text-white">
-              <PhoneCall className="h-5 w-5" />
-              Call Now
+            <Button asChild size="lg" className="gap-2 text-lg bg-green-600 hover:bg-green-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
+              <a href="tel:+91801234567" className="flex items-center gap-2">
+                <PhoneCall className="h-5 w-5" />
+                Call Now
+              </a>
             </Button>
           </motion.div>
         </motion.div>

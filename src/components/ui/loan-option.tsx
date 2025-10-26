@@ -55,10 +55,10 @@ const loanOptions: LoanOption[] = [
 export default function LoanOption() {
   return (
     <section className="relative py-16 px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/grid.svg')" }}>
-      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-black/60 md:hidden"></div>
       <div className="relative max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <div className="inline-block bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/10 max-w-3xl">
+          <div className="inline-block bg-black/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10 max-w-3xl">
             <h2 className="text-4xl font-bold text-white mb-4">
               Flexible Loan Options
             </h2>
@@ -77,7 +77,7 @@ export default function LoanOption() {
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
             >
-              <Card className="h-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden group transition-all hover:border-green-500/50 hover:-translate-y-1">
+              <Card className="h-full bg-black/20 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden group transition-all hover:border-green-500/50 hover:-translate-y-1">
                 <div className="p-6 md:p-8 flex flex-col h-full">
                   <div className="mb-6">
                     <h3 className="text-2xl font-bold text-white mb-6">
@@ -85,7 +85,7 @@ export default function LoanOption() {
                     </h3>
                     
                     <div className="space-y-4">
-                      <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
+                      <div className="flex items-center gap-3 p-3 bg-black/20 rounded-lg">
                         <div className="p-2 bg-green-500/20 rounded-lg">
                           <DollarSign className="w-5 h-5 text-green-400" />
                         </div>
@@ -95,7 +95,7 @@ export default function LoanOption() {
                         </div>
                       </div>
                       
-                      <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
+                      <div className="flex items-center gap-3 p-3 bg-black/20 rounded-lg">
                         <div className="p-2 bg-blue-500/20 rounded-lg">
                           <Clock className="w-5 h-5 text-blue-400" />
                         </div>
@@ -105,7 +105,7 @@ export default function LoanOption() {
                         </div>
                       </div>
                       
-                      <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
+                      <div className="flex items-center gap-3 p-3 bg-black/20 rounded-lg">
                         <div className="p-2 bg-purple-500/20 rounded-lg">
                           <Percent className="w-5 h-5 text-purple-400" />
                         </div>
