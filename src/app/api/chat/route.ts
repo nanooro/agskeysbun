@@ -90,9 +90,12 @@ Please provide a helpful, professional response as an AGS Financial Services AI 
   } catch (error) {
     console.error('AI API Error:', error);
 
-    // Enhanced fallback responses
-    const lowerMessage = message.toLowerCase();
-    let fallbackResponse = '';
+    // Enhanced fallback responses for unknown errors
+    let fallbackResponse = 'I\'m sorry, I encountered an error while processing your request. ';
+    
+    // Try to get the message from the error if available
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const lowerMessage = errorMessage.toLowerCase();
 
     if (lowerMessage.includes('business') || lowerMessage.includes('company')) {
       fallbackResponse = "For business loans, we offer amounts from ₹1,00,000 to ₹1,00,00,000 with competitive rates of 9.5%-16%. We provide collateral-free options, flexible repayment terms up to 84 months, overdraft facilities, and balance transfer options. Perfect for expanding your business!";
