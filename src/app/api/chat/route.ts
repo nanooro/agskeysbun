@@ -32,13 +32,13 @@ CONTACT:
 Always be helpful, professional, and focus on how AGS can help customers with their financial needs.`;
 
 export async function POST(req: NextRequest) {
-  const { message } = await req.json();
-
-  if (!message || typeof message !== 'string') {
-    return NextResponse.json({ error: 'Message is required' }, { status: 400 });
-  }
-
   try {
+    const { message } = await req.json();
+
+    if (!message || typeof message !== 'string') {
+      return NextResponse.json({ error: 'Message is required' }, { status: 400 });
+    }
+
     // Get API key from environment variable first, fallback to hardcoded key
     const API_KEY = process.env.GOOGLE_GEMINI_API_KEY || 'AIzaSyAktB0FAZrHqJvbdFnCuVuKuGUVb378CEE';
 
@@ -87,7 +87,6 @@ Please provide a helpful, professional response as an AGS Financial Services AI 
     }
 
     return NextResponse.json({ response: fallbackResponse });
-
   } catch (error) {
     console.error('AI API Error:', error);
 
