@@ -868,41 +868,40 @@ export default function Home() {
             </motion.div>
 
           </div>
+
+          {/* Quick Actions */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-green-600 to-green-700 rounded-2xl p-8 text-white shadow-2xl"
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-3 bg-white/20 rounded-xl">
+                <MessageSquare className="w-8 h-8" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold">Need Immediate Help?</h3>
+                <p className="text-green-100">Get instant assistance from our experts</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button asChild className="bg-white text-green-600 hover:bg-gray-100 flex-1 py-4 text-lg font-semibold rounded-xl">
+                <Link href="tel:+91801234567">
+                  <Phone className="w-5 h-5 mr-2" />
+                  Call Now
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-green-600 flex-1 py-4 text-lg font-semibold rounded-xl">
+                <button onClick={() => scrollToSection('#apply')}>
+                  Apply Online
+                </button>
+              </Button>
+            </div>
+          </motion.div>
         </div>
-
-        {/* Quick Actions */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          viewport={{ once: true }}
-          className="bg-gradient-to-br from-green-600 to-green-700 rounded-2xl p-8 text-white shadow-2xl"
-        >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="p-3 bg-white/20 rounded-xl">
-              <MessageSquare className="w-8 h-8" />
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold">Need Immediate Help?</h3>
-              <p className="text-green-100">Get instant assistance from our experts</p>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button asChild className="bg-white text-green-600 hover:bg-gray-100 flex-1 py-4 text-lg font-semibold rounded-xl">
-              <Link href="tel:+91801234567">
-                <Phone className="w-5 h-5 mr-2" />
-                Call Now
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-green-600 flex-1 py-4 text-lg font-semibold rounded-xl">
-              <button onClick={() => scrollToSection('#apply')}>
-                Apply Online
-              </button>
-            </Button>
-          </div>
-        </motion.div>
-      </div>
       </section>
       <section id="apply" className="py-20 px-4 sm:px-6 lg:px-8 bg-green-600">
         <div className="max-w-4xl mx-auto text-center">
