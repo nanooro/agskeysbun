@@ -35,9 +35,15 @@ export default function Header() {
   };
 
   return (
-    <div className="sticky w-screen top-0 left-0 z-50 text-black dark:text-white">
+    <div className="fixed w-screen top-0 left-0 z-50 text-black dark:text-white">
+      {/* Mobile safe area support */}
+      <style>{`
+        .mobile-safe-area {
+          padding-top: env(safe-area-inset-top, 0px);
+        }
+      `}</style>
       {/* Frosted glass effect */}
-      <Navbar className="relative">
+      <Navbar className="relative mobile-safe-area">
           <NavBody>
             <NavbarLogo />
             <NavItems
@@ -56,7 +62,7 @@ export default function Header() {
               >
                 {isMobileMenuOpen ? (
                   <IconX className="w-6 h-6" />
-                ) : (
+                   ) : (
                   <IconMenu2 className="w-6 h-6" />
                 )}
               </button>

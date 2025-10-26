@@ -49,7 +49,7 @@ const ScrollIndicator = () => {
 
 export default function HeroSectionOne() {
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center bg-cover bg-center bg-no-repeat py-20" style={{ backgroundImage: "url('/grid.svg')" }}>
+    <div className="relative flex min-h-screen flex-col items-center justify-center bg-cover bg-center bg-no-repeat py-20 pt-32" style={{ backgroundImage: "url('/grid.svg')" }}>
       <div className="absolute inset-0 bg-black/60 md:hidden"></div>
       <div className="container relative px-4 flex-1 flex items-center">
         <motion.div 
