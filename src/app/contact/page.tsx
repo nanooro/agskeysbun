@@ -1,14 +1,14 @@
 'use client';
 
-
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Send, MessageSquare } from 'lucide-react';
 import Header from '@/components/ui/header';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useState } from 'react';
+import { FullscreenProvider } from '@/lib/fullscreen-context';
 
-export default function ContactPage() {
+function ContactPageContent() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -312,5 +312,13 @@ export default function ContactPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <FullscreenProvider>
+      <ContactPageContent />
+    </FullscreenProvider>
   );
 }
