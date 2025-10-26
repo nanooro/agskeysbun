@@ -32,7 +32,7 @@ import AiChat from "@/components/ui/ai-chat";
 import { motion } from "framer-motion";
 import { Suspense } from "react";
 import LoanOption from "@/components/ui/loan-option";
-import HeroSectionOne from "@/components/ui/hero-section-one";
+import HeroSectionOne from "@/components/hero-section-demo-1";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { IconPhone } from "@tabler/icons-react";
