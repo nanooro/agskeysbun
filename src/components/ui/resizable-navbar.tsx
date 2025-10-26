@@ -1,7 +1,15 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
-import { motion, AnimatePresence, useScroll, useMotionValueEvent, useMotionValue, useSpring, useTransform } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useMotionValueEvent,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 
 import React, { useRef, useState } from "react";
 
@@ -55,7 +63,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
     if (latest > 50) setVisible(true);
     else setVisible(false);
   });
-  
+
   return (
     <motion.div
       ref={ref}
@@ -114,21 +122,29 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
       )}
     >
       {items.map((item, idx) => (
-        <a
+        <button
           onMouseEnter={() => setHovered(idx)}
-          onClick={onItemClick}
-          className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300"
+          onClick={(e) => {
+            e.preventDefault();
+            onItemClick?.();
+            // Handle smooth scrolling
+            const sectionId = item.link.replace("#", "");
+            const element = document.getElementById(sectionId);
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+          className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:text-green-600 dark:hover:text-green-400 transition-colors rounded-lg"
           key={`link-${idx}`}
-          href={item.link}
         >
           {hovered === idx && (
             <motion.div
               layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800"
+              className="absolute inset-0 h-full w-full rounded-lg bg-green-50 dark:bg-green-900/20"
             />
           )}
           <span className="relative z-20">{item.name}</span>
-        </a>
+        </button>
       ))}
     </motion.div>
   );
@@ -154,7 +170,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         damping: 50,
       }}
       className={cn(
-        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
+        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:flex",
         visible && "bg-white/20 dark:bg-neutral-950/20",
         className
       )}
@@ -190,11 +206,12 @@ export const MobileNavMenu = ({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{ opacity: 0, y: -20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -20, scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className={cn(
-            "absolute inset-x-0 top-20 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg bg-white px-4 py-8 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] dark:bg-neutral-950",
+            "absolute right-0 top-16 z-50 flex w-64 flex-col items-start justify-start gap-4 rounded-xl bg-white dark:bg-neutral-950 px-4 py-6 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] border border-neutral-200 dark:border-neutral-800",
             className
           )}
         >
@@ -239,13 +256,26 @@ export const NavbarLogo = () => {
   );
 };
 
-export const NavbarButton = ({ href, as: Tag = "a", children, className, variant = "primary", ...props }: { href?: string; as?: React.ElementType; children: React.ReactNode; className?: string; variant?: "primary" | "secondary" | "dark" | "gradient"; } & React.ComponentPropsWithoutRef<"a"> & React.ComponentPropsWithoutRef<"button">) => {
+export const NavbarButton = ({
+  href,
+  as: Tag = "a",
+  children,
+  className,
+  variant = "primary",
+  ...props
+}: {
+  href?: string;
+  as?: React.ElementType;
+  children: React.ReactNode;
+  className?: string;
+  variant?: "primary" | "secondary" | "dark" | "gradient";
+} & React.ComponentPropsWithoutRef<"a"> &
+  React.ComponentPropsWithoutRef<"button">) => {
   const baseStyles =
     "px-6 py-2.5 rounded-md text-sm font-semibold relative cursor-pointer transition-all duration-200 inline-flex items-center justify-center";
 
   const variantStyles = {
-    primary:
-      "bg-red-600 text-white hover:bg-red-700 shadow-md hover:shadow-lg",
+    primary: "bg-red-600 text-white hover:bg-red-700 shadow-md hover:shadow-lg",
     secondary: "bg-transparent text-gray-700 hover:text-gray-900",
     dark: "bg-gray-900 text-white hover:bg-gray-800",
     gradient:

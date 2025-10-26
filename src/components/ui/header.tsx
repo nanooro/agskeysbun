@@ -14,8 +14,10 @@ import { useState } from "react";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import Link from "next/link";
 import { PhoneCallIcon } from "lucide-react";
+import { useFullscreen } from "@/lib/fullscreen-context";
 
 export default function Header() {
+  const { isFullscreen } = useFullscreen();
   const navItems = [
     { name: "Home", link: "#home" },
     { name: "Loans", link: "#loans" },
@@ -27,12 +29,17 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId.replace('#', ''));
+    const element = document.getElementById(sectionId.replace("#", ""));
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
       setIsMobileMenuOpen(false);
     }
   };
+
+  // Hide header when AI chat is in fullscreen mode
+  if (isFullscreen) {
+    return null;
+  }
 
   return (
     <div className="fixed w-screen top-0 left-0 z-50 text-black dark:text-white">
@@ -44,38 +51,39 @@ export default function Header() {
       `}</style>
       {/* Frosted glass effect */}
       <Navbar className="relative mobile-safe-area">
-          <NavBody>
-            <NavbarLogo />
-            <NavItems
-              items={navItems.map((item) => ({
-                ...item,
-                className: "text-black dark:text-white hover:text-black dark:hover:text-white",
-                onClick: () => scrollToSection(item.link),
-              }))}
-              onItemClick={() => setIsMobileMenuOpen(false)}
-            />
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="hidden lg:flex items-center justify-center p-2 text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-                aria-label="Toggle menu"
-              >
-                {isMobileMenuOpen ? (
-                  <IconX className="w-6 h-6" />
-                   ) : (
-                  <IconMenu2 className="w-6 h-6" />
-                )}
-              </button>
-              <Link
-                href="tel:+91801234567"
-                className="hidden lg:flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
-                aria-label="Call us now"
-              >
-                <PhoneCallIcon className="w-5 h-5" />
-                <span className="font-medium">Call Now</span>
-              </Link>
-            </div>
-          </NavBody>
+        <NavBody>
+          <NavbarLogo />
+          <NavItems
+            items={navItems.map((item) => ({
+              ...item,
+              className:
+                "text-black dark:text-white hover:text-black dark:hover:text-white",
+              onClick: () => scrollToSection(item.link),
+            }))}
+            onItemClick={() => setIsMobileMenuOpen(false)}
+          />
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="flex items-center justify-center p-2 text-black dark:text-white hover:text-green-600 dark:hover:text-green-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-800"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? (
+                <IconX className="w-6 h-6" />
+              ) : (
+                <IconMenu2 className="w-6 h-6" />
+              )}
+            </button>
+            <Link
+              href="tel:+91801234567"
+              className="hidden lg:flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+              aria-label="Call us now"
+            >
+              <PhoneCallIcon className="w-5 h-5" />
+              <span className="font-medium">Call Now</span>
+            </Link>
+          </div>
+        </NavBody>
 
         <MobileNav>
           <MobileNavHeader>
@@ -90,7 +98,7 @@ export default function Header() {
         <MobileNavMenu
           isOpen={isMobileMenuOpen}
           onClose={() => setIsMobileMenuOpen(false)}
-          className="bg-white dark:bg-neutral-950 text-black dark:text-white lg:bg-white/95 lg:dark:bg-neutral-950/95 lg:backdrop-blur-sm lg:shadow-lg lg:border lg:border-white/10 lg:rounded-xl lg:mt-4"
+          className="bg-white dark:bg-neutral-950 text-black dark:text-white bg-white/95 dark:bg-neutral-950/95 backdrop-blur-sm shadow-lg border border-white/10 rounded-xl mt-4"
         >
           {navItems.map((item, idx) => (
             <button
