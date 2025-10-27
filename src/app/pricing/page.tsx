@@ -1,73 +1,75 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Check, X, Star } from 'lucide-react';
-import Header from '@/components/ui/header';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+export const dynamic = "force-dynamic";
+
+import { motion } from "framer-motion";
+import { Check, X, Star } from "lucide-react";
+import Header from "@/components/ui/header";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const pricingPlans = [
   {
-    name: 'Starter',
-    price: '₹2,999',
-    period: 'per month',
-    description: 'Perfect for small businesses and startups',
+    name: "Starter",
+    price: "₹2,999",
+    period: "per month",
+    description: "Perfect for small businesses and startups",
     features: [
-      { name: 'Up to ₹5,00,000 loan amount', included: true },
-      { name: '12-36 months tenure', included: true },
-      { name: 'Basic documentation required', included: true },
-      { name: 'Online application tracking', included: true },
-      { name: 'Email support', included: true },
-      { name: 'Priority processing', included: false },
-      { name: 'Dedicated relationship manager', included: false },
-      { name: 'Flexible repayment options', included: false }
+      { name: "Up to ₹5,00,000 loan amount", included: true },
+      { name: "12-36 months tenure", included: true },
+      { name: "Basic documentation required", included: true },
+      { name: "Online application tracking", included: true },
+      { name: "Email support", included: true },
+      { name: "Priority processing", included: false },
+      { name: "Dedicated relationship manager", included: false },
+      { name: "Flexible repayment options", included: false },
     ],
     popular: false,
-    buttonText: 'Get Started'
+    buttonText: "Get Started",
   },
   {
-    name: 'Professional',
-    price: '₹4,999',
-    period: 'per month',
-    description: 'Ideal for growing businesses and professionals',
+    name: "Professional",
+    price: "₹4,999",
+    period: "per month",
+    description: "Ideal for growing businesses and professionals",
     features: [
-      { name: 'Up to ₹25,00,000 loan amount', included: true },
-      { name: '12-60 months tenure', included: true },
-      { name: 'Minimal documentation', included: true },
-      { name: 'Online application tracking', included: true },
-      { name: 'Priority email & chat support', included: true },
-      { name: 'Priority processing', included: true },
-      { name: 'Dedicated relationship manager', included: true },
-      { name: 'Flexible repayment options', included: true }
+      { name: "Up to ₹25,00,000 loan amount", included: true },
+      { name: "12-60 months tenure", included: true },
+      { name: "Minimal documentation", included: true },
+      { name: "Online application tracking", included: true },
+      { name: "Priority email & chat support", included: true },
+      { name: "Priority processing", included: true },
+      { name: "Dedicated relationship manager", included: true },
+      { name: "Flexible repayment options", included: true },
     ],
     popular: true,
-    buttonText: 'Most Popular'
+    buttonText: "Most Popular",
   },
   {
-    name: 'Enterprise',
-    price: '₹7,999',
-    period: 'per month',
-    description: 'For large businesses and corporations',
+    name: "Enterprise",
+    price: "₹7,999",
+    period: "per month",
+    description: "For large businesses and corporations",
     features: [
-      { name: 'Up to ₹1,00,00,000 loan amount', included: true },
-      { name: '12-84 months tenure', included: true },
-      { name: 'Express documentation', included: true },
-      { name: 'Dedicated account portal', included: true },
-      { name: '24/7 priority support', included: true },
-      { name: 'Instant processing', included: true },
-      { name: 'Senior relationship manager', included: true },
-      { name: 'Custom repayment schedules', included: true }
+      { name: "Up to ₹1,00,00,000 loan amount", included: true },
+      { name: "12-84 months tenure", included: true },
+      { name: "Express documentation", included: true },
+      { name: "Dedicated account portal", included: true },
+      { name: "24/7 priority support", included: true },
+      { name: "Instant processing", included: true },
+      { name: "Senior relationship manager", included: true },
+      { name: "Custom repayment schedules", included: true },
     ],
     popular: false,
-    buttonText: 'Contact Sales'
-  }
+    buttonText: "Contact Sales",
+  },
 ];
 
 const interestRates = [
-  { type: 'Personal Loan', rate: '10.5% - 18%', tenure: '12-60 months' },
-  { type: 'Business Loan', rate: '9.5% - 16%', tenure: '6-84 months' },
-  { type: 'Home Loan', rate: '8.4% - 12%', tenure: '5-30 years' },
-  { type: 'Vehicle Loan', rate: '9.5% - 14%', tenure: '12-84 months' }
+  { type: "Personal Loan", rate: "10.5% - 18%", tenure: "12-60 months" },
+  { type: "Business Loan", rate: "9.5% - 16%", tenure: "6-84 months" },
+  { type: "Home Loan", rate: "8.4% - 12%", tenure: "5-30 years" },
+  { type: "Vehicle Loan", rate: "9.5% - 14%", tenure: "12-84 months" },
 ];
 
 export default function PricingPage() {
@@ -94,7 +96,8 @@ export default function PricingPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-neutral-600 dark:text-neutral-300 mb-8 max-w-3xl mx-auto"
           >
-            Choose the perfect plan for your financial needs. All our pricing is transparent with no hidden charges or surprise fees.
+            Choose the perfect plan for your financial needs. All our pricing is
+            transparent with no hidden charges or surprise fees.
           </motion.p>
         </div>
       </section>
@@ -116,8 +119,8 @@ export default function PricingPage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className={`relative bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border-2 ${
                   plan.popular
-                    ? 'border-green-500 transform scale-105'
-                    : 'border-neutral-200 dark:border-neutral-700 hover:border-green-300'
+                    ? "border-green-500 transform scale-105"
+                    : "border-neutral-200 dark:border-neutral-700 hover:border-green-300"
                 }`}
               >
                 {plan.popular && (
@@ -154,11 +157,13 @@ export default function PricingPage() {
                       ) : (
                         <X className="w-5 h-5 text-neutral-400 mt-0.5 flex-shrink-0" />
                       )}
-                      <span className={`${
-                        feature.included
-                          ? 'text-neutral-900 dark:text-white'
-                          : 'text-neutral-400 dark:text-neutral-500 line-through'
-                      }`}>
+                      <span
+                        className={`${
+                          feature.included
+                            ? "text-neutral-900 dark:text-white"
+                            : "text-neutral-400 dark:text-neutral-500 line-through"
+                        }`}
+                      >
                         {feature.name}
                       </span>
                     </li>
@@ -168,8 +173,8 @@ export default function PricingPage() {
                 <Button
                   className={`w-full py-3 text-lg font-semibold ${
                     plan.popular
-                      ? 'bg-green-600 hover:bg-green-700 text-white'
-                      : 'bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-100'
+                      ? "bg-green-600 hover:bg-green-700 text-white"
+                      : "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-100"
                   }`}
                 >
                   {plan.buttonText}
@@ -205,7 +210,10 @@ export default function PricingPage() {
                 </thead>
                 <tbody>
                   {interestRates.map((rate, index) => (
-                    <tr key={index} className="border-b border-neutral-100 dark:border-neutral-700">
+                    <tr
+                      key={index}
+                      className="border-b border-neutral-100 dark:border-neutral-700"
+                    >
                       <td className="py-4 px-4 text-neutral-900 dark:text-white font-medium">
                         {rate.type}
                       </td>
@@ -242,7 +250,8 @@ export default function PricingPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-green-100 mb-8"
           >
-            Contact our team for personalized pricing and loan solutions tailored to your specific needs.
+            Contact our team for personalized pricing and loan solutions
+            tailored to your specific needs.
           </motion.p>
 
           <motion.div
@@ -251,15 +260,20 @@ export default function PricingPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button asChild size="lg" className="bg-white text-green-600 hover:bg-gray-100 px-8 py-4 text-lg">
-              <Link href="/contact">
-                Contact Sales
-              </Link>
+            <Button
+              asChild
+              size="lg"
+              className="bg-white text-green-600 hover:bg-gray-100 px-8 py-4 text-lg"
+            >
+              <Link href="/contact">Contact Sales</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-green-600 px-8 py-4 text-lg">
-              <Link href="tel:+91801234567">
-                Call Now
-              </Link>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="border-white text-white hover:bg-white hover:text-green-600 px-8 py-4 text-lg"
+            >
+              <Link href="tel:+91801234567">Call Now</Link>
             </Button>
           </motion.div>
         </div>
