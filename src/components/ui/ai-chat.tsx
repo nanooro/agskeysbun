@@ -377,7 +377,10 @@ export default function AiChat() {
                   )}
                 </button>
                 <button
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    setIsFullscreen(false);
+                  }}
                   className="p-1 hover:bg-white/20 rounded-full transition-colors duration-200"
                   aria-label="Close chat"
                 >
