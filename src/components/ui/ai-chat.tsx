@@ -87,16 +87,19 @@ export default function AiChat() {
     }
   }, [isOpen]);
 
-  const generateResponse = async (userMessage: string): Promise<string> => {
+  const generateResponse = async (conversation: Message[]): Promise<string> => {
     try {
-      console.log("Sending message to AI API:", userMessage);
-
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: userMessage }),
+        body: JSON.stringify({
+          messages: conversation.map(({ role, content }) => ({
+            role,
+            content,
+          })),
+        }),
       });
 
       if (!response.ok) {
@@ -104,15 +107,15 @@ export default function AiChat() {
       }
 
       const data = await response.json();
-      console.log("AI API Response:", data);
 
-      return (
-        data.response ||
-        "I'm having trouble connecting right now. Please try again."
-      );
+      if (!data?.response || typeof data.response !== "string") {
+        throw new Error("Invalid AI response payload");
+      }
+
+      return data.response;
     } catch (error) {
       console.error("Error generating response:", error);
-      return getIntelligentResponse(userMessage);
+      throw error;
     }
   };
 
@@ -226,13 +229,14 @@ export default function AiChat() {
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    const updatedConversation = [...messages, userMessage];
+    setMessages(updatedConversation);
     setInputMessage("");
     setIsLoading(true);
     setShowQuickActions(false);
 
     try {
-      const aiResponse = await generateResponse(userMessage.content);
+      const aiResponse = await generateResponse(updatedConversation);
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -258,7 +262,7 @@ export default function AiChat() {
     }
   };
 
-  const handleQuickAction = (action: string) => {
+  const handleQuickAction = async (action: string) => {
     let message = "";
     switch (action) {
       case "calculator":
@@ -279,11 +283,13 @@ export default function AiChat() {
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    const updatedConversation = [...messages, userMessage];
+    setMessages(updatedConversation);
     setShowQuickActions(false);
     setIsLoading(true);
 
-    generateResponse(message).then((aiResponse) => {
+    try {
+      const aiResponse = await generateResponse(updatedConversation);
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: aiResponse,
@@ -291,8 +297,19 @@ export default function AiChat() {
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error("Quick action chat error:", error);
+      const fallbackResponse = getIntelligentResponse(message);
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: fallbackResponse,
+        role: "assistant",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, assistantMessage]);
+    } finally {
       setIsLoading(false);
-    });
+    }
   };
 
   const formatTime = (date: Date) => {
